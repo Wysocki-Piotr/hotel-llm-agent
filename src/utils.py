@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
+import logging
+from datetime import datetime
 
 console = Console()
 
@@ -50,3 +52,18 @@ KROK 2-4: LOGIKA WYKONAWCZA (JEŚLI WALIDACJA PRZESZŁA):
 FORMAT WYJŚCIA:
 Zwróć TYLKO ponumerowaną listę kroków (np. "1. Znajdź hotele...", "2. Pobierz kurs..."). Nie dodawaj wstępów ani wyjaśnień.
 """
+
+def setup_logging():
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
+
+    log_filename = f"logs/agent_{datetime.now().strftime('%Y-%m-%d')}.log"
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s [%(levelname)s] %(message)s',
+        handlers=[
+            logging.FileHandler(log_filename, encoding='utf-8'),
+            logging.StreamHandler() 
+        ]
+    )

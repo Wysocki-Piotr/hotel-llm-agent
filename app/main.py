@@ -8,9 +8,11 @@ sys.path.append(parent_dir)
 from langchain_core.messages import HumanMessage
 from src.database import init_db
 from src.agent import app
+from src.utils import setup_logging
 
 
 def run_chat():
+    setup_logging()
     init_db()
     
     print("--- ASYSTENT PODRÓŻY (wpisz 'q' aby wyjść) ---")

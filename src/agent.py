@@ -2,6 +2,7 @@ import operator
 from typing import Annotated, List, TypedDict, Union
 from typing_extensions import TypedDict
 import os
+import logging
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage, BaseMessage, AIMessage
@@ -41,6 +42,9 @@ def planner_node(state: AgentState):
 
     chain = planner_prompt | llm
     response = chain.invoke({"query": user_query})
+    log_msg = f"Planner: Stworzono plan działania dla zapytania '{user_query}'."
+    logging.ingo(log_msg)
+    logging.info(response.content)
 
     return {
         "plan": response.content,
@@ -73,11 +77,14 @@ def agent_node(state: AgentState):
 
     log_entry = "Agent: Decyzja podjęta."
     if response.tool_calls:
-        tool_names = [t['name'] for t in response.tool_calls]
-        log_entry = f"Agent: Wybrano narzędzia: {', '.join(tool_names)}"
+        calls_info = []
+        for t in response.tool_calls:
+            calls_info.append(f"{t['name']}(args={t['args']})")
+        log_entry = f"Agent: Wybrano narzędzia: {', '.join(calls_info)}"
     else:
         log_entry = "Agent: Generowanie odpowiedzi końcowej."
 
+    logging.info(log_entry)
     return {
         "messages": [response],
         "logs": [log_entry]
