@@ -1,5 +1,7 @@
 # Szybka Instrukcja użycia
 
+## 0 środowisko + pobranie zależności
+
 ## 1 Utwórz plik .env z  zawartością: (jeżeli model lokalny to w ogole nie jest potrzebny)
         GOOGLE_API_KEY={tu wstaw klucz do api}
 ## 2 Jeżeli nie używasz lokalnego modelu llama 3.1:
