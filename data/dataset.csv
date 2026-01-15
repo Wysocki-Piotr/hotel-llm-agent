@@ -1,5 +1,6 @@
 id,prompt,city,sort_order,num_nights,num_people,target_currency
 1,Ile kosztuje 4-dniowy pobyt w Warsaw dla 1 osobowej rodziny? Celuję w dobry standard. Cena w EUR.,Warsaw,optimal,4,1,EUR
+2,Planuję wyjazd do Paryża na 3 noce. Jedziemy w 5 osób. Ile to wyjdzie w EUR?,Paris,optimal,3,5,EUR
 3,Planuję wyjazd do Warsaw na 9 nocy. Jedziemy w 2 osób. Ile to wyjdzie w USD?,Warsaw,optimal,9,2,USD
 4,Planuję wyjazd do Paris na 2 nocy. Jedziemy w 4 osób. Ile to wyjdzie w EUR?,Paris,optimal,2,4,EUR
 5,Planuję wyjazd do London na 13 nocy. Jedziemy w 6 osób. Ile to wyjdzie w EUR?,London,optimal,13,6,EUR

@@ -1,10 +1,10 @@
 llm:
-  provider: "ollama"
-  model_name: "llama3.1"
-  temperature: 0.3
+  llm:
+  provider: "groq"
+  model_name: "llama-3.3-70b-versatile"  # To jest ten potężny, szybki model
+  temperature: 0.1
   base_url: "http://localhost:11434" # Dla providera 'openai_compatible' (VM) lub Ollama
-  num_gpu: 99, #wzięte z nikąd ale działa, coś koło 40 wystarczy
-  num_ctx: 4096 #2048 bylo za małe, 8192 wolne
+  num_gpu: 99
 
 database:
   url: "sqlite:///data/hotels.db"

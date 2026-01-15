@@ -20,7 +20,7 @@ def build_agent_graph():
 
     # Przekazujemy LLM do węzłów (Dependency Injection)
     workflow.add_node("planner", create_planner_node(llm))
-    workflow.add_node("agent", create_agent_node(llm_with_tools))
+    workflow.add_node("agent", create_agent_node(llm, llm_with_tools))
     workflow.add_node("tools", ToolNode(ALL_TOOLS))
 
     workflow.add_edge(START, "planner")

@@ -9,3 +9,4 @@ class AgentState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
     plan: str
     logs: Annotated[list[str], operator.add]
+    mode: str

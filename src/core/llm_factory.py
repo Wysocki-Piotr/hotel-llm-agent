@@ -2,7 +2,7 @@ import os
 
 from langchain_core.language_models import BaseChatModel
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_ollama import ChatOllama
+from langchain_groq import ChatGroq
 
 
 # from langchain_openai import ChatOpenAI
@@ -13,14 +13,7 @@ def get_llm(llm_config: dict) -> BaseChatModel:
     temp = llm_config.get("temperature", 0.3)
     base_url = llm_config.get("base_url")
 
-    if provider == "ollama":
-        return ChatOllama(
-            model=model,
-            temperature=temp,
-            base_url=base_url or "http://localhost:11434"
-        )
-
-    elif provider == "google":
+    if provider == "google":
         api_key = os.getenv("GOOGLE_API_KEY")
         return ChatGoogleGenerativeAI(
             model=model,
@@ -28,14 +21,16 @@ def get_llm(llm_config: dict) -> BaseChatModel:
             google_api_key=api_key
         )
 
-    # elif provider == "openai_compatible":
-    #     # Idealne dla vLLM na zdalnej maszynie
-    #     return ChatOpenAI(
-    #         model=model,
-    #         temperature=temp,
-    #         openai_api_base=base_url,
-    #         api_key="EMPTY"
-    #     )
+    elif provider == "groq":
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            raise ValueError("Brak GROQ_API_KEY w pliku .env")
+        
+        return ChatGroq(
+            model_name=model,
+            temperature=temp,
+            api_key=api_key
+        )
 
     else:
         raise ValueError(f"Nieznany provider LLM: {provider}")
