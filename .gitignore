@@ -7,3 +7,5 @@ env/
 /logs
 
 /src/__pycache__
+
+.idea

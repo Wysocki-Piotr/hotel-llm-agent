@@ -1,5 +1,7 @@
 import operator
 from typing import Annotated, List, TypedDict, Union
+
+from langchain_ollama import ChatOllama
 from typing_extensions import TypedDict
 import os
 import logging
@@ -14,11 +16,13 @@ from langgraph.prebuilt import ToolNode, tools_condition
 from src.tools import search_hotels, get_exchange_rate, calculate_trip_cost
 from src.utils import setup_env, SYSTEM_PROMPT
 
-setup_env() 
+setup_env()
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    temperature=0
+llm = ChatOllama(
+    model="llama3.1",
+    temperature=0.3,
+    num_gpu=99,
+    num_ctx=4096
 )
 
 tools = [search_hotels, get_exchange_rate, calculate_trip_cost]
@@ -32,7 +36,7 @@ class AgentState(TypedDict):
 def planner_node(state: AgentState):
     """Analizuje zapytanie i tworzy plan działania."""
     print("--- PLANNER: TWORZENIE PLANU ---")
-    
+
     user_query = state["messages"][-1].content
 
     planner_prompt = ChatPromptTemplate.from_messages([
@@ -43,7 +47,7 @@ def planner_node(state: AgentState):
     chain = planner_prompt | llm
     response = chain.invoke({"query": user_query})
     log_msg = f"Planner: Stworzono plan działania dla zapytania '{user_query}'."
-    logging.ingo(log_msg)
+    logging.info(log_msg)
     logging.info(response.content)
 
     return {
@@ -104,8 +108,8 @@ workflow.add_conditional_edges(
     "agent",
     tools_condition,
     {
-        "tools": "tools", 
-        END: END        
+        "tools": "tools",
+        END: END
     }
 )
 
