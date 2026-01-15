@@ -5,7 +5,9 @@ venv/
 env/
 
 /logs
+.idea/
+__pycache__/
+*.pyc
+
 
 /src/__pycache__
-
-.idea
