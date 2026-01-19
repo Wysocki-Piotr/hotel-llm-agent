@@ -81,7 +81,7 @@ Zapytanie miało na celu przetestowanie czy agent jest w stanie wywołać tylko 
 
 ![Dopytywanie o dane](images/TylkoJednaFunkcja.png)
 
-### Przypadek 4 – Nietypowe sformułowanie pytania
+### Przypadek 5 – Nietypowe sformułowanie pytania
 Zapytanie miało na celu przetestowanie czy agent wymyśli jakieś miasto niedaleko plaży czy dopyta o konkret. Dopytał o miasto.
 
 ![Dopytywanie o dane](images/Konkret-BrakHalucynacji.png)
@@ -107,6 +107,7 @@ Test miał na celu sprawdzić jak agent zinterpretuje nietypowe sformułowanie m
 ## 5. Podsumowanie
 
 Projekt zakończył się sukcesem ze średnią skutecznością na poziomie **86.5%**. Architektura LangGraph zapewniła stabilność, a podział na Planera i Agenta pozwolił na skuteczną weryfikację poprawności danych wejściowych. Główne obszary do poprawy to obsługa skrajnych wartości liczbowych oraz lepsza domyślność w przypadku ogólnych pytań.
+
 
 
 
