@@ -15,6 +15,8 @@ def get_llm(llm_config: dict) -> BaseChatModel:
 
     if provider == "google":
         api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            raise ValueError("Brak GOOGLE_API_KEY .env")
         return ChatGoogleGenerativeAI(
             model=model,
             temperature=temp,
@@ -25,7 +27,6 @@ def get_llm(llm_config: dict) -> BaseChatModel:
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise ValueError("Brak GROQ_API_KEY w pliku .env")
-        
         return ChatGroq(
             model_name=model,
             temperature=temp,

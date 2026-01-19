@@ -3,15 +3,18 @@ import logging
 from datetime import datetime
 from dotenv import load_dotenv
 
+from pathlib import Path  # Pamiętaj o imporcie!
+
 
 def setup_env():
     """Ładuje zmienne środowiskowe z pliku .env i sprawdza klucze."""
-    load_dotenv()
 
-    # Opcjonalna walidacja - ostrzeż, jeśli brak kluczy, a nie używamy tylko Ollamy
-    if not os.getenv("GOOGLE_API_KEY") and not os.getenv("OPENAI_API_KEY"):
-        logging.warning("Nie wykryto kluczy API (GOOGLE/OPENAI) w pliku .env. Upewnij się, że to zamierzone.")
+    #ścieżka do pliku .env w głównym folderze
+    env_path = Path(__file__).parent.parent / '.env'
+    load_dotenv(dotenv_path=env_path)
 
+    if not os.getenv("GOOGLE_API_KEY") and not os.getenv("GROQ_API_KEY") and not os.getenv("OPENAI_API_KEY"):
+        logging.warning(f"Nie wykryto kluczy API w pliku: {env_path}. Upewnij się, że plik istnieje i ma zmienne.")
 
 def setup_logging():
     """Konfiguruje logowanie do pliku i konsoli."""

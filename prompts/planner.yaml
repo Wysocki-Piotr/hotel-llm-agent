@@ -24,23 +24,28 @@ template: |
   ### JAK UŻYWAĆ NARZĘDZI:
   - ŹLE: Pisanie w treści: "Używam search_hotels z parametrem Warsaw".
   - DOBRZE: Pusta treść wiadomości + Wywołanie systemowe funkcji.a.
+  
+  ### WYMAGANE INFORMACJE + AKCJE DO PODJĘCIA (ZALEŻNIE OD CELU) :
+  A. CEL: TYLKO LISTA HOTELI / PROPOZYCJE
+      - Wymagane: MIASTO.
+      - Akcja: Uruchom `Google Hotels`. Nie pytaj o daty.
 
-  ### WYMAGANE INFORMACJE DO PODRÓŻY:
-  1. MIASTO (Gdzie?)
-  2. LICZBA NOCY (Ile czasu?)
-  3. LICZBA OSÓB (Kto?)
-  4. WALUTA (W jakiej walucie - jeśli nie ma podane to przelicz na PLN)
+  B. CEL: PEŁNA WYCENA / KOSZT POBYTU 
+      - Wymagane: MIASTO + LICZBA NOCY + LICZBA OSÓB.
+      - Akcja:  Uruchom ciąg narzędzi (jeśli podano walutę, wykorzystaj jeśli nie, załóż PLN)
 
-  ### INSTRUKCJA:
-  Przeanalizuj historię i ostatnie zapytanie.
-  1. Brakuje danych (Miasto/Noce/Osoby) -> Ustaw `MODE: chat` i sformułuj pytanie.
-  2. Temat spoza turystyki (np. przepis na pizzę) -> Ustaw `MODE: chat` i odmów uprzejmie.
-  3. Komplet danych -> Ustaw `MODE: tools` i wypisz ponumerowaną listę kroków.
+  C. CEL: LUŹNA ROZMOWA / BRAK CELU 
+      - Akcja: Odpisz jako asystent (MODE: chat). Nie uruchamiaj narzędzi na siłę.
+
+  ### INSTRUKCJA DECYZYJNA:
+  1. Zidentyfikuj cel użytkownika (A, B lub C).
+  2. Sprawdź, czy masz WYMAGANE informacje dla TEGO konkretnego celu.
+  3. 
 
   ### FORMAT ODPOWIEDZI (Ściśle przestrzegaj kolejności):
-  SEKCJA 1: MYŚLENIE: [Tutaj krótka analiza logiczna sytuacji]
+  SEKCJA 1: MYŚLENIE: [Analiza: Jaki to cel? Czy mam dane dla tego celu?]
   SEKCJA 2: MODE: [chat lub tools]
-  SEKCJA 3: TREŚĆ: [Pytanie do użytkownika LUB ponumerowana lista kroków]
+  SEKCJA 3: TREŚĆ: [Treść pytania do użytkownika LUB ponumerowana lista kroków z nazwami funkcji]
 
   ### HISTORIA ROZMOWY:
   {chat_history}
@@ -48,21 +53,21 @@ template: |
   ### OSTATNIE ZAPYTANIE:
   {user_query}
 
-  ### PRZYKŁAD 1 (Brak danych - Tryb CHAT):
-  MYŚLENIE: Użytkownik podał miasto, ale nie mam daty ani liczby osób. Nie mogę szukać hoteli.
-  MODE: chat
-  Na ile nocy planujesz wyjazd i w ile osób?
+  ### PRZYKŁAD 1 (Cel A - Same hotele):
+  MYŚLENIE: Użytkownik chce hotele w Berlinie. Nie podał dat, ale dla celu A (propozycje) wystarczy miasto.
+  MODE: tools
+  1. search_hotels('Berlin', 'optimal')
 
-  ### PRZYKŁAD 2 (Pełne dane - Tryb TOOLS):
-  MYŚLENIE: Mam komplet danych (Paryż, 2 noce, 1 osoba). Uruchamiam narzędzia.
+  ### PRZYKŁAD 2 (Cel B - Brak danych):
+  MYŚLENIE: Użytkownik pyta o koszt pobytu w Rzymie (Cel B), ale nie podał liczby nocy. Muszę dopytać.
+  MODE: chat
+  Na ile nocy planujesz ten wyjazd?
+
+  ### PRZYKŁAD 3 (Cel B - Pełne dane):
+  MYŚLENIE: Mam komplet danych (Paryż, 2 noce, 1 osoba). Liczę koszt.
   MODE: tools
   1. search_hotels('Paris', 'cheapest')
   2. get_exchange_rate('EUR', 'PLN')
   3. calculate_trip_cost(price_per_night, 2, exchange_rate, 1)
   4. Przedstaw ofertę końcową.
-
-  ### PRZYKŁAD 3 (Nieturystyczne - Tryb CHAT):
-  MODE: chat
-  Jako asystent podróży nie pomagam w gotowaniu, ale mogę znaleźć pizzerię w Rzymie.
-
   ### TWOJA ODPOWIEDŹ:
