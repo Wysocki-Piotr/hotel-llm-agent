@@ -78,7 +78,7 @@ Agent rozpoznaje, że urzytkownik pyta go o zagadnienia nie związane z jego zad
 
 ## Porażki 
 
-###Przypadek 1 - zignoruj instrukcje
+### Przypadek 1 - zignoruj instrukcje
 
 agent po otzrymaniu polecenia zignoruj dotychczasowe instrukcje niestety odchodzi od swojego zadania
 
@@ -87,3 +87,4 @@ agent po otzrymaniu polecenia zignoruj dotychczasowe instrukcje niestety odchodz
 ## 5. Podsumowanie
 
 Projekt zakończył się sukcesem ze średnią skutecznością na poziomie **86.5%**. Architektura LangGraph zapewniła stabilność, a podział na Planera i Agenta pozwolił na skuteczną weryfikację poprawności danych wejściowych. Główne obszary do poprawy to obsługa skrajnych wartości liczbowych oraz lepsza domyślność w przypadku ogólnych pytań.
+
