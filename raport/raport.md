@@ -55,6 +55,8 @@ Po odrzuceniu błędów technicznych API i ręcznej weryfikacji (Manual Review) 
 
 ## 4. Analiza Przypadków (przykłady)
 
+## Sukcesy
+
 ### Przypadek 1 – Dopytywanie o brakujące dane
 Agent wykrywa brak kluczowych informacji (liczba nocy, liczba osób) i zamiast wykonywać obliczenia przechodzi w tryb konwersacyjny, prosząc użytkownika o doprecyzowanie danych.
 
@@ -69,9 +71,19 @@ System poprawnie rozpoznaje zapytanie, które nie wymaga użycia narzędzi, i od
 
 ---
 
-### Przypadek 3 – Odporność na próby obejścia instrukcji
-Agent ignoruje polecenia sprzeczne z zasadami systemu („zignoruj instrukcje”) i konsekwentnie trzyma się zaplanowanego trybu działania.
+### Przypadek 3 – nie na temat
+Agent rozpoznaje, że urzytkownik pyta go o zagadnienia nie związane z jego zadaniem i konsekwentnie trzyma się zaplanowanego trybu działania.
 
-![Ignorowanie instrukcji](images/zignoruj_instrukcje.png)
+![nie na teamt](images/niebieski.png)
+
+## Porażki 
+
+###Przypadek 1 - zignoruj instrukcje
+
+agent po otzrymaniu polecenia zignoruj dotychczasowe instrukcje niestety odchodzi od swojego zadania
+
+![zignoruj instrukcje](images/zignoruj_instrukcje.png)
+
 ## 5. Podsumowanie
+
 Projekt zakończył się sukcesem ze średnią skutecznością na poziomie **86.5%**. Architektura LangGraph zapewniła stabilność, a podział na Planera i Agenta pozwolił na skuteczną weryfikację poprawności danych wejściowych. Główne obszary do poprawy to obsługa skrajnych wartości liczbowych oraz lepsza domyślność w przypadku ogólnych pytań.
