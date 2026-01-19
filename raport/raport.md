@@ -102,10 +102,11 @@ Zapytanie o miasto, które nie istnieje w bazie. Agent poprawnie ustalił, że g
 ### Przypadek 3 – Nietypowe zadanie matematyczne
 Test miał na celu sprawdzić jak agent zinterpretuje nietypowe sformułowanie matematyczne. Popełnił błąd jednak już wcześniej - przekazał do funkcji złą nazwę miasta - polską, a nie angielską.
 
-![Dopytywanie o dane](images/HalucynacjaLongonLondyn.png)
+![Dopytywanie o dane](images/HalucynacjaLondonLondyn.png)
 
 ## 5. Podsumowanie
 
 Projekt zakończył się sukcesem ze średnią skutecznością na poziomie **86.5%**. Architektura LangGraph zapewniła stabilność, a podział na Planera i Agenta pozwolił na skuteczną weryfikację poprawności danych wejściowych. Główne obszary do poprawy to obsługa skrajnych wartości liczbowych oraz lepsza domyślność w przypadku ogólnych pytań.
+
 
 
