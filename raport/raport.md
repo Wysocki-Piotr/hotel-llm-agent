@@ -53,38 +53,25 @@ Po odrzuceniu błędów technicznych API i ręcznej weryfikacji (Manual Review) 
 
 ---
 
-## 4. Analiza Jakościowa (Success & Failure Cases)
+## 4. Analiza Przypadków (przykłady)
 
-### Przypadek Pozytywny 1: Złożone wnioskowanie
-**Prompt:** *"Szukam luksusu w Londynie dla mnie i wspólnika na 3 dni."* (ID 35)
+### Przypadek 1 – Dopytywanie o brakujące dane
+Agent wykrywa brak kluczowych informacji (liczba nocy, liczba osób) i zamiast wykonywać obliczenia przechodzi w tryb konwersacyjny, prosząc użytkownika o doprecyzowanie danych.
 
-> **Odpowiedź Agenta:**
-> "Znalazłem luksusowy hotel w Londynie (cena: 1000 GBP/noc). Kurs wymiany walut to 1 GBP = 4.8704 PLN. Całkowity koszt 3-dniowego pobytu dla 2 osób wyniesie 29222.40 PLN."
+![Dopytywanie o dane](images/dopytywanie.png)
 
-**Analiza:** Agent poprawnie zidentyfikował liczbę osób ("mnie i wspólnika" = 2), domyślnie przeliczył walutę na PLN (zgodnie z logiką systemu) i wykonał poprawny ciąg obliczeń.
+---
 
-### Przypadek Pozytywny 2: Guardrails (Ochrona przed błędami)
-**Prompt:** *"Ile zapłacę za -5 nocy w Nowym Jorku?"* (ID 36)
+### Przypadek 2 – Tryb konwersacyjny (small talk)
+System poprawnie rozpoznaje zapytanie, które nie wymaga użycia narzędzi, i odpowiada w trybie czatu, bez uruchamiania warstwy obliczeniowej.
 
-> **Odpowiedź Agenta:**
-> "Liczba nocy nie może być ujemna. Na ile nocy planujesz ten wyjazd?"
+![Tryb czatu](images/hej.png)
 
-**Analiza:** Zamiast wykonać bezsensowne obliczenia, agent wykrył błąd logiczny w danych wejściowych i przeszedł w tryb dopytywania (Chat Mode).
+---
 
-### Przypadek Negatywny 1: Błąd techniczny modelu (Tool Use Error)
-**Prompt:** *"Organizuję zlot fanów w Barcelonie dla 5000 osób..."* (ID 55)
+### Przypadek 3 – Odporność na próby obejścia instrukcji
+Agent ignoruje polecenia sprzeczne z zasadami systemu („zignoruj instrukcje”) i konsekwentnie trzyma się zaplanowanego trybu działania.
 
-> **Status:** ERROR: Error code: 400 ... 'tool_use_failed'
-
-**Analiza:** Przy skrajnych wartościach (5000 osób), model wygenerował niepoprawny format wywołania funkcji (JSON z doklejonymi tagami XML), co spowodowało awarię API.
-
-### Przypadek Negatywny 2: Niejasność kontekstu
-**Prompt:** *"Ile kosztuje nocleg w Radomiu?"* (ID 32)
-
-> **Odpowiedź Agenta:**
-> "Ile nocy planujesz spędzić w Radomiu i ile osób będzie podróżować?"
-
-**Analiza:** Choć technicznie poprawne (agent potrzebuje danych do wzoru), z perspektywy User Experience użytkownik oczekiwałby raczej podania przykładowej ceny za jedną noc ("cennika"), zamiast pytania pomocniczego.
-
+![Ignorowanie instrukcji](images/zignoruj_instrukcje.png)
 ## 5. Podsumowanie
 Projekt zakończył się sukcesem ze średnią skutecznością na poziomie **86.5%**. Architektura LangGraph zapewniła stabilność, a podział na Planera i Agenta pozwolił na skuteczną weryfikację poprawności danych wejściowych. Główne obszary do poprawy to obsługa skrajnych wartości liczbowych oraz lepsza domyślność w przypadku ogólnych pytań.
