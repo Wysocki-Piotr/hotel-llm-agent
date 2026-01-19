@@ -104,6 +104,18 @@ Test miał na celu sprawdzić jak agent zinterpretuje nietypowe sformułowanie m
 
 ![Dopytywanie o dane](images/HalucynacjaLondonLondyn.png)
 
+
+## Alternatywny model
+
+Powyższą analizę przeprowadziliśmy dla dla modelu 'llama-3.3-70b-versatile' jednak przetestowaliśmy także mniejszy model 'gpt-oss-20b'
+Niestety ten model już gorzej radził sobie z wykorzystywaniem narzędzi.
+
+![gpt20](images/gpt20.png)
+
+Jednak po dopytaniu potrafił poprawnie ich użyć.
+
+![gpt20_powrót ](images/gpt20_powrót.png)
+
 ## 5. Podsumowanie
 
 Projekt zakończył się sukcesem ze średnią skutecznością na poziomie **86.5%**. Architektura LangGraph zapewniła stabilność, a podział na Planera i Agenta pozwolił na skuteczną weryfikację poprawności danych wejściowych. Główne obszary do poprawy to obsługa skrajnych wartości liczbowych oraz lepsza domyślność w przypadku ogólnych pytań.
