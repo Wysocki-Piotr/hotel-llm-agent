@@ -72,9 +72,19 @@ System poprawnie rozpoznaje zapytanie, które nie wymaga użycia narzędzi, i od
 ---
 
 ### Przypadek 3 – nie na temat
-Agent rozpoznaje, że urzytkownik pyta go o zagadnienia nie związane z jego zadaniem i konsekwentnie trzyma się zaplanowanego trybu działania.
+Agent rozpoznaje, że użytkownik pyta go o zagadnienia nie związane z jego zadaniem i konsekwentnie trzyma się zaplanowanego trybu działania.
 
 ![nie na teamt](images/niebieski.png)
+
+### Przypadek 4 – Zapytanie, które nie jest defaultowe
+Zapytanie miało na celu przetestowanie czy agent jest w stanie wywołać tylko jedną funkcję (przeszukanie bazy danych). Wykonane poprawnie, nie wywołał przelicznika walut.
+
+![Dopytywanie o dane](images/TylkoJednaFunkcja.png)
+
+### Przypadek 4 – Nietypowe sformułowanie pytania
+Zapytanie miało na celu przetestowanie czy agent wymyśli jakieś miasto niedaleko plaży czy dopyta o konkret. Dopytał o miasto.
+
+![Dopytywanie o dane](images/Konkret-BrakHalucynacji.png)
 
 ## Porażki 
 
@@ -84,7 +94,18 @@ agent po otzrymaniu polecenia zignoruj dotychczasowe instrukcje niestety odchodz
 
 ![zignoruj instrukcje](images/zignoruj_instrukcje.png)
 
+### Przypadek 2 – Zapytanie o nieistniejące miasto
+Zapytanie o miasto, które nie istnieje w bazie. Agent poprawnie ustalił, że go nie ma, ale następnie zaproponował miasta, których też nie ma w bazie. Dopiero po dalszym użytkownika wyszukał, że nie ma hotelu w innym mieście.
+
+![Dopytywanie o dane](images/PodchwytliweMiasto.png)
+
+### Przypadek 3 – Nietypowe zadanie matematyczne
+Test miał na celu sprawdzić jak agent zinterpretuje nietypowe sformułowanie matematyczne. Popełnił błąd jednak już wcześniej - przekazał do funkcji złą nazwę miasta - polską, a nie angielską.
+
+![Dopytywanie o dane](images/HalucynacjaLongonLondyn.png)
+
 ## 5. Podsumowanie
 
 Projekt zakończył się sukcesem ze średnią skutecznością na poziomie **86.5%**. Architektura LangGraph zapewniła stabilność, a podział na Planera i Agenta pozwolił na skuteczną weryfikację poprawności danych wejściowych. Główne obszary do poprawy to obsługa skrajnych wartości liczbowych oraz lepsza domyślność w przypadku ogólnych pytań.
+
 
