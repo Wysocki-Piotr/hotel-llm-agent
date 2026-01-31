@@ -15,6 +15,7 @@ Create a file named .env in the root directory and add your API key (generate fr
 GROQ_API_KEY=your_actual_api_key_here
 
 ## 2. Choose model and configure config/settings.yaml
+```yaml
 llm:
   provider: "groq"
   model_name: "llama-3.3-70b-versatile"  # Powerful and fast model
@@ -28,6 +29,7 @@ database:
 logging:
   level: "INFO"
   file: "logs/agent.log"
+```
 
 ### 3. Launch an app
 ```bash
